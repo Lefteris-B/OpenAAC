@@ -1,0 +1,305 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram name="Software architecture and data flow" id="openaac-software">
+    <mxGraphModel dx="1569" dy="921" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lane_mcu" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#F4FAF7;strokeColor=#1D9E75;strokeWidth=1.5;dashed=1;dashPattern=8 4;" value="" vertex="1">
+          <mxGeometry height="610" width="410" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_mcu_title" parent="1" style="text;html=1;fontSize=14;fontStyle=1;fontColor=#085041;align=center;verticalAlign=top;" value="STM32U585 MCU — Zephyr RTOS" vertex="1">
+          <mxGeometry height="25" width="410" x="40" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_mpu" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#F5F2FA;strokeColor=#7F77DD;strokeWidth=1.5;dashed=1;dashPattern=8 4;" value="" vertex="1">
+          <mxGeometry height="610" width="410" x="530" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_mpu_title" parent="1" style="text;html=1;fontSize=14;fontStyle=1;fontColor=#3C3489;align=center;verticalAlign=top;" value="QRB2210 MPU — Debian Linux / Python" vertex="1">
+          <mxGeometry height="25" width="410" x="530" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="bridge_bg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F0;strokeColor=#AAAAAA;strokeWidth=0.5;opacity=60;" value="" vertex="1">
+          <mxGeometry height="560" width="76" x="452" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="bridge_title" parent="1" style="text;html=1;fontSize=11;fontStyle=1;fontColor=#888888;align=center;verticalAlign=top;" value="Bridge&#xa;RPC" vertex="1">
+          <mxGeometry height="35" width="66" x="457" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="bms_telem" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9FE1CB;strokeColor=#1D9E75;fontStyle=1;fontSize=12;fontColor=#085041;" value="Battery telemetry" vertex="1">
+          <mxGeometry height="45" width="160" x="260" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="bms_telem_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#0F6E56;align=left;verticalAlign=top;spacingLeft=4;" value="MAX17320 I²C (SOC, voltage)&#xa;INA226 I²C (current)&#xa;NTC ADC (temperature)&#xa;MP2731 charge control" vertex="1">
+          <mxGeometry height="50" width="170" x="260" y="337" as="geometry" />
+        </mxCell>
+        <mxCell id="wake_sleep_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#0F6E56;align=left;verticalAlign=top;spacingLeft=4;" value="Button/jack wake interrupt&#xa;Idle timeout → suspend&#xa;Low-battery shutdown" vertex="1">
+          <mxGeometry height="40" width="160" x="260" y="167" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_mgr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CECBF6;strokeColor=#7F77DD;fontStyle=1;fontSize=12;fontColor=#3C3489;" value="UI manager" vertex="1">
+          <mxGeometry height="45" width="170" x="560" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ui_mgr_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#534AB7;align=left;verticalAlign=top;spacingLeft=4;" value="Screen state machine&#xa;Grid/QWERTY/scan mode&#xa;Generates display commands&#xa;(pictogram IDs + positions)" vertex="1">
+          <mxGeometry height="55" width="170" x="560" y="167" as="geometry" />
+        </mxCell>
+        <mxCell id="sent_buf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CECBF6;strokeColor=#7F77DD;fontStyle=1;fontSize=12;fontColor=#3C3489;" value="Sentence buffer" vertex="1">
+          <mxGeometry height="45" width="160" x="760" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="sent_buf_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#534AB7;align=left;verticalAlign=top;spacingLeft=4;" value="Pictogram ID sequence&#xa;Assembled text string&#xa;Undo stack" vertex="1">
+          <mxGeometry height="45" width="160" x="760" y="167" as="geometry" />
+        </mxCell>
+        <mxCell id="bert_eng" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CECBF6;strokeColor=#7F77DD;fontStyle=1;fontSize=12;fontColor=#3C3489;" value="BERT inference engine" vertex="1">
+          <mxGeometry height="45" width="170" x="560" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="bert_eng_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#534AB7;align=left;verticalAlign=top;spacingLeft=4;" value="ONNX Runtime, INT8&#xa;6-layer, 384-hidden, ~15M params&#xa;1000-class pictogram classifier&#xa;Target: &lt;500 ms inference" vertex="1">
+          <mxGeometry height="55" width="180" x="560" y="302" as="geometry" />
+        </mxCell>
+        <mxCell id="tts_eng" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CECBF6;strokeColor=#7F77DD;fontStyle=1;fontSize=12;fontColor=#3C3489;" value="TTS engine" vertex="1">
+          <mxGeometry height="45" width="160" x="760" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="tts_eng_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#534AB7;align=left;verticalAlign=top;spacingLeft=4;" value="eSpeak-NG (GPL v3)&#xa;WAV generation&#xa;ALSA → USB audio DAC" vertex="1">
+          <mxGeometry height="45" width="160" x="760" y="302" as="geometry" />
+        </mxCell>
+        <mxCell id="pwr_mgr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CECBF6;strokeColor=#7F77DD;fontStyle=1;fontSize=12;fontColor=#3C3489;" value="Power management" vertex="1">
+          <mxGeometry height="45" width="160" x="760" y="385" as="geometry" />
+        </mxCell>
+        <mxCell id="pwr_mgr_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#534AB7;align=left;verticalAlign=top;spacingLeft=4;" value="Receives battery state&#xa;Linux suspend/resume" vertex="1">
+          <mxGeometry height="30" width="160" x="760" y="432" as="geometry" />
+        </mxCell>
+        <mxCell id="emmc" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=10;fillColor=#E8E0F0;strokeColor=#7F77DD;fontSize=10;fontColor=#3C3489;fontStyle=0;" value="eMMC persistence" vertex="1">
+          <mxGeometry height="65" width="170" x="560" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="emmc_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#534AB7;align=left;verticalAlign=top;spacingLeft=4;" value="Model weights (15 MB)&#xa;User vocabulary (300 slots)&#xa;eSpeak voices (20 MB)&#xa;Recently-used cache" vertex="1">
+          <mxGeometry height="55" width="170" x="560" y="467" as="geometry" />
+        </mxCell>
+        <mxCell id="personal" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEDFE;strokeColor=#AFA9EC;fontStyle=1;fontSize=12;fontColor=#534AB7;dashed=1;" value="Personalisation" vertex="1">
+          <mxGeometry height="45" width="170" x="560" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="personal_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#534AB7;align=left;verticalAlign=top;spacingLeft=4;fontStyle=2;" value="Fine-tune last 2 layers + head&#xa;on user&#39;s own text (opt-in)&#xa;Wi-Fi sync once → radio off" vertex="1">
+          <mxGeometry height="45" width="180" x="560" y="592" as="geometry" />
+        </mxCell>
+        <mxCell id="flow1" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#D85A30;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="230" y="142" as="sourcePoint" />
+            <mxPoint x="452" y="142" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow1b" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#D85A30;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="528" y="142" as="sourcePoint" />
+            <mxPoint x="560" y="142" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow2" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#D85A30;strokeWidth=1.5;fontSize=10;fontStyle=1;fontColor=#D85A30;" value="② update">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="730" y="142" as="sourcePoint" />
+            <mxPoint x="760" y="142" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow3" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#D85A30;strokeWidth=1.5;fontSize=10;fontStyle=1;fontColor=#D85A30;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="③ infer(context)">
+          <mxGeometry relative="1" x="0.4444" y="-45" as="geometry">
+            <mxPoint y="1" as="offset" />
+            <mxPoint x="645" y="165" as="sourcePoint" />
+            <mxPoint x="645" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow4" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#378ADD;strokeWidth=1.5;fontSize=10;fontStyle=1;fontColor=#378ADD;dashed=1;dashPattern=4 4;" value="④ top-5 predictions">
+          <mxGeometry relative="1" x="-0.4444" y="-60" as="geometry">
+            <mxPoint y="1" as="offset" />
+            <mxPoint x="680" y="255" as="sourcePoint" />
+            <mxPoint x="680" y="165" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow5" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#378ADD;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="230" />
+            </Array>
+            <mxPoint x="560" y="155" as="sourcePoint" />
+            <mxPoint x="528" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow5_label" parent="1" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#378ADD;align=left;verticalAlign=top;" value="⑤ display_update&#xa;{pictogram_ids,&#xa; positions, text}" vertex="1">
+          <mxGeometry height="45" width="120" x="460" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="flow5b" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#378ADD;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="452" y="276.94" as="sourcePoint" />
+            <mxPoint x="230" y="276.94" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow_tile" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#1D9E75;strokeWidth=1;fontSize=9;fontColor=#0F6E56;fontStyle=2;" value="read tiles">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="380" as="sourcePoint" />
+            <mxPoint x="150" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow6" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#BA7517;strokeWidth=1.5;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="310" as="sourcePoint" />
+            <mxPoint x="452" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow6_label" parent="1" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#BA7517;align=right;" value="⑥ battery_state" vertex="1">
+          <mxGeometry height="18" width="110" x="340" y="375" as="geometry" />
+        </mxCell>
+        <mxCell id="flow6b" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#BA7517;strokeWidth=1.5;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="528" y="400" as="sourcePoint" />
+            <mxPoint x="760" y="407" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow7" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#D85A30;strokeWidth=1.5;fontSize=10;fontStyle=1;fontColor=#D85A30;" value="⑦ speak(text)">
+          <mxGeometry relative="1" x="0.4444" y="40" as="geometry">
+            <mxPoint y="1" as="offset" />
+            <mxPoint x="840" y="165" as="sourcePoint" />
+            <mxPoint x="840" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow_model" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#7F77DD;strokeWidth=1;fontSize=9;fontColor=#534AB7;fontStyle=2;" value="load model">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="645" y="360" as="sourcePoint" />
+            <mxPoint x="645" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow_wake" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#888888;strokeWidth=1;fontSize=9;fontColor=#888888;fontStyle=2;dashed=1;" value="wake/suspend">
+          <mxGeometry relative="1" x="-0.0978" y="-8" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="438" y="145" />
+              <mxPoint x="438" y="430" />
+            </Array>
+            <mxPoint x="420" y="145" as="sourcePoint" />
+            <mxPoint x="452" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hw_buttons" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF3DE;strokeColor=#639922;fontStyle=1;fontSize=11;fontColor=#27500A;" value="11 tactile buttons&#xa;+ 3.5mm switch jack" vertex="1">
+          <mxGeometry height="50" width="180" x="60" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_hw_btn" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#639922;strokeWidth=1.5;fontSize=10;fontColor=#639922;" value="GPIO / ADC">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="720" as="sourcePoint" />
+            <mxPoint x="150" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hw_epd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F1FB;strokeColor=#378ADD;fontStyle=1;fontSize=11;fontColor=#0C447C;" value="4.2&quot; e-paper display&#xa;400×300, B/W" vertex="1">
+          <mxGeometry height="50" width="180" x="60" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_hw_epd" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#378ADD;strokeWidth=1.5;fontSize=10;fontColor=#378ADD;" value="SPI">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="55" y="380" />
+              <mxPoint x="55" y="790" />
+              <mxPoint x="90" y="790" />
+            </Array>
+            <mxPoint x="90" y="380" as="sourcePoint" />
+            <mxPoint x="90" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hw_speaker" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAECE7;strokeColor=#D85A30;fontStyle=1;fontSize=11;fontColor=#712B13;" value="USB audio DAC&#xa;→ PAM8403 → speaker" vertex="1">
+          <mxGeometry height="50" width="180" x="750" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_hw_btn_to" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#639922;strokeWidth=1.5;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="670" as="sourcePoint" />
+            <mxPoint x="150" y="165" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr_hw_spk" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#D85A30;strokeWidth=1.5;fontSize=10;fontColor=#D85A30;" value="USB / ALSA">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="840" y="347" as="sourcePoint" />
+            <mxPoint x="840" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hw_bms" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAEEDA;strokeColor=#BA7517;fontStyle=1;fontSize=11;fontColor=#633806;" value="MAX17320 / INA226&#xa;MP2731 / NTC / 18650 cells" vertex="1">
+          <mxGeometry height="50" width="200" x="270" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_hw_bms" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#BA7517;strokeWidth=1.5;fontSize=10;fontColor=#BA7517;" value="I²C / ADC">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="550" />
+            </Array>
+            <mxPoint x="370" y="720" as="sourcePoint" />
+            <mxPoint x="370" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hw_wifi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EFE8;strokeColor=#888780;fontStyle=0;fontSize=11;fontColor=#5F5E5A;dashed=1;" value="Wi-Fi antenna&#xa;(built-in)" vertex="1">
+          <mxGeometry height="45" width="180" x="750" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="arr_hw_wifi" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#888888;strokeWidth=1;dashed=1;fontSize=9;fontColor=#888888;fontStyle=2;" value="one-time sync">
+          <mxGeometry relative="1" x="-0.0692" y="-12" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="730" y="780" />
+              <mxPoint x="760" y="780" />
+              <mxPoint x="800" y="780" />
+            </Array>
+            <mxPoint x="735" y="590" as="sourcePoint" />
+            <mxPoint x="800" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#CCCCCC;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="90" width="910" x="40" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#333333;align=left;" value="Data flow legend" vertex="1">
+          <mxGeometry height="20" width="120" x="55" y="885" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_orange_line" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#D85A30;strokeWidth=2;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="920" as="sourcePoint" />
+            <mxPoint x="95" y="920" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_orange_t" parent="1" style="text;html=1;fontSize=10;fontColor=#666666;align=left;" value="User action flow (input → inference → speak)" vertex="1">
+          <mxGeometry height="18" width="260" x="100" y="912" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_blue_line" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#378ADD;strokeWidth=2;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="945" as="sourcePoint" />
+            <mxPoint x="95" y="945" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_blue_t" parent="1" style="text;html=1;fontSize=10;fontColor=#666666;align=left;" value="Display update flow (predictions → e-paper)" vertex="1">
+          <mxGeometry height="18" width="260" x="100" y="937" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_amber_line" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#BA7517;strokeWidth=1.5;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="920" as="sourcePoint" />
+            <mxPoint x="440" y="920" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_amber_t" parent="1" style="text;html=1;fontSize=10;fontColor=#666666;align=left;" value="Battery telemetry flow" vertex="1">
+          <mxGeometry height="18" width="150" x="445" y="912" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_gray_line" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#888888;strokeWidth=1;dashed=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="945" as="sourcePoint" />
+            <mxPoint x="440" y="945" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_gray_t" parent="1" style="text;html=1;fontSize=10;fontColor=#666666;align=left;" value="Power management / optional" vertex="1">
+          <mxGeometry height="18" width="200" x="445" y="937" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_steps" parent="1" style="text;html=1;fontSize=10;fontColor=#666666;align=left;verticalAlign=top;" value="① – ⑦  Numbered steps show the main interaction loop:&#xa;button press → UI update → BERT inference → prediction display → speak" vertex="1">
+          <mxGeometry height="50" width="280" x="595" y="912" as="geometry" />
+        </mxCell>
+        <mxCell id="input_handler" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9FE1CB;strokeColor=#1D9E75;fontStyle=1;fontSize=12;fontColor=#085041;" value="Input handler" vertex="1">
+          <mxGeometry height="45" width="160" x="70" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="input_handler_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#0F6E56;align=left;verticalAlign=top;spacingLeft=4;" value="Button debounce&#xa;Switch-scan state machine&#xa;GPIO interrupt-driven" vertex="1">
+          <mxGeometry height="40" width="160" x="70" y="167" as="geometry" />
+        </mxCell>
+        <mxCell id="epd_driver" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9FE1CB;strokeColor=#1D9E75;fontStyle=1;fontSize=12;fontColor=#085041;" value="E-paper driver" vertex="1">
+          <mxGeometry height="45" width="160" x="70" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="epd_driver_sub" parent="1" style="text;html=1;fontSize=9;fontColor=#0F6E56;align=left;verticalAlign=top;spacingLeft=4;" value="Local bitmap compositing&#xa;SPI partial/full refresh&#xa;Ghosting counter" vertex="1">
+          <mxGeometry height="40" width="160" x="70" y="337" as="geometry" />
+        </mxCell>
+        <mxCell id="tile_store" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=10;fillColor=#DFF0EA;strokeColor=#1D9E75;fontSize=10;fontColor=#085041;fontStyle=0;" value="Pictogram bitmap tiles&#xa;(1000× pre-rendered 50×50 1-bit)" vertex="1">
+          <mxGeometry height="60" width="170" x="70" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="wake_sleep" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9FE1CB;strokeColor=#1D9E75;fontStyle=1;fontSize=12;fontColor=#085041;" value="Wake / sleep control" vertex="1">
+          <mxGeometry height="45" width="160" x="260" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="flow1_label" parent="1" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#D85A30;align=center;verticalAlign=bottom;" value="① button_event" vertex="1">
+          <mxGeometry height="18" width="120" x="280" y="123" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
